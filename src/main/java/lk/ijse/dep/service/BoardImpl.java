@@ -80,7 +80,7 @@ public class BoardImpl implements  Board {
     @Override
     public void updateMove(int col, Piece move) {
 
-
+        System.out.println("hello");
 
     }
 
