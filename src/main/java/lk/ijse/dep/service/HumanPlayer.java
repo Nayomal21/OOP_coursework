@@ -11,22 +11,27 @@ public class HumanPlayer extends Player {
 
     @Override
     public void movePiece(int col) {
-         if (board.isLegalMove(col)) {
+         if (board.isLegalMove(col)) { if(!board.findWinner().getWinningPiece().equals(Piece.EMPTY)) {
+             board.getBoardUI().notifyWinner(board.findWinner());
 
-             board.updateMove(col,Piece.BLUE);
-             board.getBoardUI().update(col,true);
 
-            if(board.findWinner().getWinningPiece().equals(Piece.EMPTY)) {
 
-                if (!board.existLegalMoves())
-                board.getBoardUI().notifyWinner(board.findWinner());
 
-            }
 
 
          }else {
 
-             return;
-}
+             if (!board.existLegalMoves())  new Winner(Piece.EMPTY);
+
+
+         }
+
+             board.updateMove(col,Piece.BLUE);
+             board.getBoardUI().update(col,true);
+
+
+
+
+         }
     }
 }

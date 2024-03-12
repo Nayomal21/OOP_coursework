@@ -26,12 +26,20 @@ public class AiPlayer extends Player {
             board.updateMove(col, Piece.GREEN);
             board.getBoardUI().update(col, false);
 
-            if (board.findWinner().getWinningPiece().equals(Piece.EMPTY)) {
+        if(board.findWinner().getWinningPiece()!=(Piece.EMPTY)) {
+            board.getBoardUI().notifyWinner(board.findWinner());
 
-                if (!board.existLegalMoves())
-                board.getBoardUI().notifyWinner(board.findWinner());
 
-            }
+
+
+
+
+        }else {
+
+            if (!board.existLegalMoves())  board.getBoardUI().notifyWinner(new Winner(Piece.EMPTY));
+
+
+        }
 
 
 

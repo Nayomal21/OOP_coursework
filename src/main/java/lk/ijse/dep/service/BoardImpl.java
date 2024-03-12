@@ -29,7 +29,6 @@ public class BoardImpl implements  Board {
 
     @Override
     public int findNextAvailableSpot(int col) {
-        System.out.println("check");
 
 
 
@@ -99,40 +98,33 @@ public class BoardImpl implements  Board {
 
     @Override
     public Winner findWinner() {
-/*
-        // check  horizontally
-        for (int i = 0; i < pieces.length; i++) {  //i means col,j means raw
-            for (int j = 0; j <pieces[i].length-3; j++) {
-
-                if (    pieces[i][j]!=(Piece.EMPTY)&&
-                        pieces[i][j].equals(pieces[i][j+1]) &&
-                        pieces[i][j].equals(pieces[i][j+2]) &&
-                        pieces[i][j].equals(pieces[i][j+3])
-                ) return new Winner(pieces[i][j],i,j,i,j+3);
-
-            }
-
-        }
-
-
+      //  pieces=new Piece[NUM_OF_COLS][NUM_OF_RAWS];
         //check vertically
+        for (int i = 0; i <pieces.length ; i++) {
 
-        for (int i = 0; i <NUM_OF_RAWS; i++) {
-            for (int j = 0; j <NUM_OF_COLS-3; j++) {
-
-                if (    pieces[j][i]!=(Piece.EMPTY)&&
-                        pieces[j][i].equals(pieces[j+1][i]) &&
-                        pieces[j][i].equals(pieces[j+2][i]) &&
-                        pieces[j][i].equals(pieces[j+3][i]))
-                    return new Winner(pieces[i][j],i,j,i,j+3);
+             for (int j = 0; j <pieces[i].length-3; j++) {
+                if (pieces[i][j]!=Piece.EMPTY && pieces[i][j]==pieces[i][j+1] && pieces[i][j]==pieces[i][j+2] && pieces[i][j]==pieces[i][j+3]) {
 
 
+                    return new Winner(pieces[i][j], i, j, i, j + 3);
+                }
             }
+
 
         }
 
-*/      if (pieces[0][0].equals(pieces[0][1]))
-            return new Winner(pieces[0][0],0,0,0,3);
+        for (int i = 0; i <pieces.length-3 ; i++) {
+            for (int j = 0; j <pieces[i].length; j++) {
+                if (pieces[i][j]!=Piece.EMPTY && pieces[i][j]==pieces[i+1][j] && pieces[i][j]==pieces[i+2][j] && pieces[i][j]==pieces[i+3][j]) {
+                    return new Winner(pieces[i][j],i,j,i+3,j);
+
+                }
+
+
+                }
+
+
+            }
 
 
         return  new Winner(Piece.EMPTY);
