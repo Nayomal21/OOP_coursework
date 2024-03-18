@@ -10,7 +10,15 @@ public class Winner {
     private  int row2;
 
     public Winner(Piece winningPiece) {
+
         this.winningPiece = winningPiece;
+
+        int col1 =-1;
+        int row1 =-1;
+        int col2 = -1;
+        int row2 = -1;
+
+
     }
 
     public Winner(Piece winningPiece, int col1, int row1, int col2, int row2) {
@@ -59,5 +67,16 @@ public class Winner {
 
     public void setRow2(int row2) {
         this.row2 = row2;
+    }
+
+    @Override
+    public String toString() {
+        return "Winner{" +
+                "winningPiece=" + winningPiece +
+                ", col1=" + col1 +
+                ", row1=" + row1 +
+                ", col2=" + col2 +
+                ", row2=" + row2 +
+                '}';
     }
 }

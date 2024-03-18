@@ -5,14 +5,12 @@ import java.util.ArrayList;
 public class BoardImpl implements  Board {
 
 
-
     private  Piece[][] pieces;
-
     private  BoardUI boardUI;
 
     public BoardImpl(BoardUI boardUI) {
         this.boardUI = boardUI;
-        pieces=new Piece[NUM_OF_COLS][NUM_OF_RAWS];
+        pieces=new Piece[NUM_OF_COLS][NUM_OF_ROWS];
        for (Piece[] x : pieces) {
            for (int i = 0; i <x.length; i++) {
             x[i]= Piece.EMPTY;
@@ -21,6 +19,10 @@ public class BoardImpl implements  Board {
        }
         
     }
+/*
+    public Piece[][] getPieces() {
+        return pieces; // to use Intermediate AI
+    }*/
 
     @Override
     public BoardUI getBoardUI() {
@@ -30,16 +32,9 @@ public class BoardImpl implements  Board {
     @Override
     public int findNextAvailableSpot(int col) {
 
-
-
               for (int j = 0; j <pieces[col].length; j++) {
                   if (pieces[col][j].equals(Piece.EMPTY)) return j;
               }
-
-
-
-
-
 
         return -1;
     }
@@ -51,13 +46,7 @@ public class BoardImpl implements  Board {
 
                     if (pieces[col][j].equals(Piece.EMPTY))
                         return true;
-
-
                 }
-
-
-
-
 
         return false;
     }
@@ -71,31 +60,25 @@ public class BoardImpl implements  Board {
             for (int j = 0; j <pieces[i].length; j++) {
 
                     if (pieces[i][j].equals(Piece.EMPTY)){
-                        System.out.println("exist");
 
                         return true;}
                 }
-
-
-
         }
-
-
         return false;
-
     }
 
+    @Override
+    public void updateMove(int col,int row, Piece move) {
+
+        pieces[col][row]= move;
+
+    }
     @Override
     public void updateMove(int col, Piece move) {
 
         pieces[col][findNextAvailableSpot(col)]= move;
 
     }
-
-
-
-
-
     @Override
     public Winner findWinner() {
       //  pieces=new Piece[NUM_OF_COLS][NUM_OF_RAWS];
@@ -103,7 +86,9 @@ public class BoardImpl implements  Board {
         for (int i = 0; i <pieces.length ; i++) {
 
              for (int j = 0; j <pieces[i].length-3; j++) {
-                if (pieces[i][j]!=Piece.EMPTY && pieces[i][j]==pieces[i][j+1] && pieces[i][j]==pieces[i][j+2] && pieces[i][j]==pieces[i][j+3]) {
+                if (pieces[i][j]!=Piece.EMPTY && pieces[i][j]==pieces[i][j+1]
+                        && pieces[i][j]==pieces[i][j+2]
+                        && pieces[i][j]==pieces[i][j+3]) {
 
 
                     return new Winner(pieces[i][j], i, j, i, j + 3);
@@ -112,7 +97,7 @@ public class BoardImpl implements  Board {
 
 
         }
-
+        // check horizontally
         for (int i = 0; i <pieces.length-3 ; i++) {
             for (int j = 0; j <pieces[i].length; j++) {
                 if (pieces[i][j]!=Piece.EMPTY && pieces[i][j]==pieces[i+1][j] && pieces[i][j]==pieces[i+2][j] && pieces[i][j]==pieces[i+3][j]) {
@@ -129,9 +114,5 @@ public class BoardImpl implements  Board {
 
         return  new Winner(Piece.EMPTY);
     }
-
-
-
-
 
 }
